@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // Import axios
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -15,11 +16,16 @@ function Register() {
     }));
   };
 
-  const handleRegister = () => {
-    // Implement registration logic here
-    // You would typically make an API call to your backend
+  const handleRegister = async () => {
+    try {
+      await axios.post('http://localhost:8000/api/register', formData); // Use the backend URL
+      alert('User registered successfully');
+    } catch (error) {
+      console.error('Error registering user', error);
+      alert('An error occurred while registering user');
+    }
   };
-
+  
   return (
     <div>
       <h2>Register</h2>
